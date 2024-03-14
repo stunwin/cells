@@ -7,7 +7,11 @@ cheight = height / 4 # calculate these in controls function
 con_x = width - cwidth # calculate these in controls function 
 w = 5 #TODO rename this is cell width 
 rule_number = 182
-rules = bin(rule_number)[2:].zfill(8)
+rules_int = bin(rule_number)[2:].zfill(8)
+rules = []
+for i in rules_int:
+    rules.append(int(i))
+
 
 def main():
     
@@ -85,10 +89,10 @@ def b_buttons(cwidth, cheight, screen, con_x, y_offset, button_count, padding):
     button_space = (cwidth - button_width * button_count) / (button_count + 1)
     
     for (i, j) in enumerate(rules):
-        width = 1 - int(j)
+        width = 1 - j
         pygame.draw.rect(screen, "black", (con_x + button_space * (i + 1) + button_width * (i), y_offset, button_width, button_height), width)
         if mousey(con_x + button_space * (i + 1) + button_width * (i), y_offset, button_width, button_height) and pygame.mouse.get_pressed()[0]:
-            rules[i] = str(width)
+            rules[i] = width
             
         
 def mousey(button_x, button_y, button_w, button_h):
